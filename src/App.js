@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Routes, Route } from 'react-router-dom';
+import ManRegister from './manager/ManRegister';
+import AdminHome from "./admin/AdminHome";
+import ManHome from "./manager/ManHome";
+import Login from "./Login";
+import Man from "./manager/Man";
 
 function App() {
+  const [logged, setLogged] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/admin" element={<AdminHome logged={logged} />} />
+      <Route path='/manager' element={<Man logged={logged} />} />
+      <Route path="/manager/dashboard" element={<ManHome logged={logged} />} />
+      <Route path="/" element={<Login set={setLogged} />} />
+      <Route path="/register" element={<ManRegister />} />
+    </Routes>
   );
 }
 
